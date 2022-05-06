@@ -13,8 +13,9 @@ const info = document.createElement('div');
 textArea.className = 'virtual-keyboard__textarea';
 container.className = 'container';
 info.className = 'info';
-info.innerHTML = `Клавиатура создана в операционной системе <b>Windows</b><br>
-Для переключения языка комбинация: <kbd>ctrl + alt</kbd>`;
+info.innerHTML = `<p>Клавиатура создана в операционной системе <b>Windows</b><br>
+Для переключения языка комбинация: <kbd>ctrl + alt</kbd></p>
+<a href="https://github.com/Jeneko/rss-virtual-keyboard/tree/dev" class="github-link">Link to Github</a>`;
 
 // Place everything on page
 container.append(textArea);
