@@ -78,10 +78,25 @@ export default class VirtualKeyboard {
 
     window.addEventListener('keydown', this.realKeyboardKeyHandler.bind(this));
     window.addEventListener('keyup', this.realKeyboardKeyHandler.bind(this));
+    window.addEventListener('mouseup', this.outsideVirtualKeyboardHandler.bind(this));
   }
 
   setInput(input) {
     this.input = input;
+  }
+
+  outsideVirtualKeyboardHandler() {
+    // Fix mousedown on shift and then mouseup outside of it
+    if (this.state.shift) {
+      this.state.shift = false;
+      this.updateVirtualKeyboard();
+    }
+    // Fix mousedown on caps and then mouseup outside of it
+    if (this.state.capsState === 'down') {
+      this.state.capsState = 'up';
+      this.state.caps = !this.state.caps;
+      this.updateVirtualKeyboard();
+    }
   }
 
   virtualKeyboardClickHandler(e) {
@@ -164,8 +179,12 @@ export default class VirtualKeyboard {
 
     // If click on caps
     if (code === 'CapsLock') {
+      if (event.type === 'mousedown') {
+        this.state.capsState = 'down';
+      }
       if (event.type === 'mouseup' || event.type === 'keyup') {
         this.state.caps = !this.state.caps;
+        this.state.capsState = 'up';
         this.updateVirtualKeyboard();
       }
       return;
