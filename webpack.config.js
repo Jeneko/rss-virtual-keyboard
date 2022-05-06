@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const conf = {
     entry: './src/index.js',
@@ -28,7 +29,14 @@ const conf = {
         }),
         new EslintWebpackPlugin({ fix: true }),
         new MiniCssExtractPlugin(),
-    ]
+    ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            '...', // this will include all standard minimizers
+            new CssMinimizerPlugin(),
+        ]
+    }
 }
 
 module.exports = function (env, argv) {
