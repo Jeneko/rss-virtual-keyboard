@@ -3,9 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+const conf = {
     entry: './src/index.js',
-    devtool: 'source-map',
     output: {
         filename: 'script.js',
         path: path.resolve(__dirname, 'dist'),
@@ -30,4 +29,9 @@ module.exports = {
         new EslintWebpackPlugin({ fix: true }),
         new MiniCssExtractPlugin(),
     ]
+}
+
+module.exports = function (env, argv) {
+    conf.devtool = (argv.mode === 'production') ? 'none' : 'eval-source-map';
+    return conf; 
 }
