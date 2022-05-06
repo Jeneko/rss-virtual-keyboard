@@ -20,6 +20,13 @@ const conf = {
             {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.(woff|woff2)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[name]_[hash][ext]'
+                }
             }
         ]
     },
