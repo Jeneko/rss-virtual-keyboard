@@ -4,7 +4,6 @@ const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    watch: true,
     mode: 'production',
     entry: './src/index.js',
     devtool: 'source-map',
