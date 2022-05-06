@@ -2,7 +2,7 @@
 $btn-radius: 6px;
 
 // BUTTON UNIT SIZES
-$unit:          60px;
+$unit:          50px;
 $size-1u:       $unit;
 $size-1_25u:    $unit * 1.25;
 $size-1_5u:     $unit * 1.5;
@@ -14,6 +14,7 @@ $size-6_25u:    $unit * 6.25;
 
 // Colors
 $color-white: #ffffff;
+$color-led-on: #00ff00;
 
 $color-bg-hovered: #FFA800;
 $color-text-default: #777777;
