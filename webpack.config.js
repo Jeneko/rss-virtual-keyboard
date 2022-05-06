@@ -40,6 +40,6 @@ const conf = {
 }
 
 module.exports = function (env, argv) {
-    conf.devtool = (argv.mode === 'production') ? 'none' : 'eval-source-map';
+    conf.devtool = (argv.mode === 'production') ? undefined : 'eval-source-map';
     return conf; 
 }
