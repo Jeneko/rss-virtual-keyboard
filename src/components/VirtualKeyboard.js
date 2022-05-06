@@ -35,7 +35,7 @@ function getKeyboardFromButtonSet(buttonSet) {
 }
 
 function getCursorPosition(input) {
-  return input.selectionEnd;
+  return input.selectionStart;
 }
 
 function setCursorPosition(input, cursorPosition) {
@@ -56,11 +56,11 @@ function insertStringInString(str1, str2, pos) {
   return str1.slice(0, pos) + str2 + str1.slice(pos);
 }
 
-function deleteCharByPos(str, pos) {
+function deleteCharsFromPos(str, pos, qty = 1) {
   if (pos < 0 || pos > str.length) {
     return str;
   }
-  return str.slice(0, pos) + str.slice(pos + 1);
+  return str.slice(0, pos) + str.slice(pos + qty);
 }
 
 export default class VirtualKeyboard {
@@ -195,9 +195,11 @@ export default class VirtualKeyboard {
     // If click on Backspace
     if (code === 'Backspace') {
       if (event.type === 'mousedown' || event.type === 'keydown') {
+        const qty = this.input.selectionEnd - this.input.selectionStart || 1;
         const currentCursorPosition = getCursorPosition(this.input);
-        this.input.value = deleteCharByPos(this.input.value, currentCursorPosition - 1);
-        setCursorPosition(this.input, currentCursorPosition - 1);
+        const delPos = qty > 1 ? currentCursorPosition : currentCursorPosition - 1;
+        this.input.value = deleteCharsFromPos(this.input.value, delPos, qty);
+        setCursorPosition(this.input, delPos);
       }
       this.input.focus();
       return;
@@ -207,7 +209,8 @@ export default class VirtualKeyboard {
     if (code === 'Delete') {
       if (event.type === 'mousedown' || event.type === 'keydown') {
         const currentCursorPosition = getCursorPosition(this.input);
-        this.input.value = deleteCharByPos(this.input.value, currentCursorPosition);
+        const qty = this.input.selectionEnd - this.input.selectionStart || 1;
+        this.input.value = deleteCharsFromPos(this.input.value, currentCursorPosition, qty);
         setCursorPosition(this.input, currentCursorPosition);
       }
       this.input.focus();
@@ -234,6 +237,12 @@ export default class VirtualKeyboard {
     if (event.type === 'mousedown' || event.type === 'keydown') {
       let symbol = '';
       const currentCursorPosition = getCursorPosition(this.input);
+
+      // Delete selected text (if any)
+      const qty = this.input.selectionEnd - this.input.selectionStart;
+      if (qty > 0) {
+        this.input.value = deleteCharsFromPos(this.input.value, currentCursorPosition, qty);
+      }
 
       // Get button key
       if (typeof this.buttonSet[code].key === 'object') {
