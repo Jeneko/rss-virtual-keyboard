@@ -11,6 +11,7 @@ const container = document.createElement('div');
 const info = document.createElement('div');
 
 textArea.className = 'virtual-keyboard__textarea';
+textArea.spellcheck = false;
 container.className = 'container';
 info.className = 'info';
 info.innerHTML = `<p>Клавиатура создана в операционной системе <b>Windows</b><br>
