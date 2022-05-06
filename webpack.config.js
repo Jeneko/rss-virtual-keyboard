@@ -25,7 +25,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new EslintWebpackPlugin(),
+        new EslintWebpackPlugin({ fix: true }),
         new MiniCssExtractPlugin(),
     ]
 }
