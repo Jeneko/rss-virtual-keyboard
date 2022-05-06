@@ -1,0 +1,22 @@
+// BUTTON UNIT SIZES
+$unit:          100px;
+$size-1u:       $unit;
+$size-1_25u:    $unit * 1.25;
+$size-1_5u:     $unit * 1.5;
+$size-1_75u:    $unit * 1.75;
+$size-2u:       $unit * 2.00;
+$size-2_25u:    $unit * 2.25;
+$size-2_75u:    $unit * 2.75;
+$size-6_25u:    $unit * 6.25;
+
+// Colors
+$color-bg-hovered: #FFA800;
+$color-text-default: #777777;
+$color-text-hovered: #ffffff;
+$color-text-pressed: #ffffff;
+
+// Gradients
+$grad-bg-default: linear-gradient(180deg, #E4E4E4 0%, #C7C7C7 100%);
+$grad-bg-pressed: linear-gradient(180deg, #767676 0%, #989898 100%);
+$grad-border-default: linear-gradient(180deg, #F1F1F1 0%, #D3D3D3 9.9%, #BDBDBD 100%);
+$grad-border-pressed: linear-gradient(180deg, #C4C4C4 0%, #B5B5B5 9.9%, #BDBDBD 100%);
